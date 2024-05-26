@@ -1,33 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        if(len(s)%2==0):
-            l=[]
-            p=[]
-            for i in s[0:]:
-                if(i=="(" or i=="{" or i=="["):
-                    l.extend(i)
-                    print(l)
-                else:
-                    p.extend(i)
-                    if(i==")" and l[-1]=="("):
-                        l.pop()
-                        p.pop()
-                    elif(i=="}" and l[-1]=="{"):
-                        l.pop()
-                        p.pop()
-                    elif(i=="]" and l[-1]=="["):
-                        l.pop()
-                        p.pop()
-                    else:
-                        return False
-                        break
-            if len(l)==0 and len(l)==len(p):
-                return True
-            else:
+        d={"(":")","{":"}","[":"]"}
+        l=[]
+        for i in s:
+            if i in d:
+                l.append(i)
+            elif(d[l.pop()]!=i or len(l)==0):
                 return False
-        else:
-            return False
+        return len(l)==0
 ss=Solution()
-s=str(input("Enter string: "))
-ans=ss.isValid(s)   
-print("Is ",s,"is valid: ",ans) 
+s=str(input("Enter str: "))
+ans=ss.isValid(s)
+print(ans)
